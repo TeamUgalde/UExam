@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title UExam
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %div#body-container
+      %header
+        %nav.navbar.navbar-static-top.navbar-default
+          .container.navbar-container
+            %h4.pull-left.navbar-logo
+              %i.fa.fa-list-alt
+                UExam
+      %main
+        = yield
+      %footer.footer
+        %nav.navbar.navbar-default
+          .container.navbar-container
+            %h5.pull-right
+              &copy;
+              Created by UTeam
