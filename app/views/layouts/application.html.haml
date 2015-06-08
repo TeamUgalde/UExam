@@ -1,0 +1,49 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title UExam
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %div#body-container
+      %header
+        %nav.navbar.navbar-static-top.navbar-default
+          .container.navbar-container
+            %h3.pull-left.navbar-logo
+              = link_to root_url, :class => 'navbar-link' do
+                %i.fa.fa-list-alt
+                  UExam
+            %div.navbar-links-container.pull-right
+              - if user_signed_in?
+                %strong.pull-right
+                  Usuario:
+                  = current_user.email
+                %div.clear
+                %div.pull-right
+                  = link_to root_path, :class => 'navbar-link' do
+                    %i.fa.fa-user
+                      Mi Perfil
+                  = link_to destroy_user_session_path, method: :delete, :class => 'navbar-link' do
+                    %i.fa.fa-sign-out
+                      Salir
+              - else
+                = link_to new_user_registration_path, :class => 'navbar-link enter-link', data: { toggle: "modal", target: "#nav-modal" }, remote: true do
+                  %i.fa.fa-plus
+                    Registrarse
+                |
+                = link_to new_user_session_path, :class => 'navbar-link enter-link', data: { toggle: "modal", target: "#nav-modal" }, remote: true do
+                  %i.fa.fa-sign-in
+                    Entrar
+      %main.main-container
+        = render partial: "partials/alerts", flash: flash
+        = render partial: "partials/navmodal", flash: flash
+        .container
+          = yield
+
+      %footer.footer
+        %nav.navbar.navbar-default
+          .container
+            %h4.pull-right#sign
+              &copy; Created by UTeam

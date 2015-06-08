@@ -1,0 +1,86 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+html, body {
+    box-sizing: border-box !important;
+    margin:0 !important;
+    padding:0 !important;
+    height:100% !important;
+    background-color: #F1F1F1;
+}
+
+.clear {
+    clear: both;
+}
+
+#body-container{
+    min-height: 100%;
+    position: relative;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px floralwhite inset !important;
+}
+/*General styles  -  End*/
+
+/*-----------------------------------------------------------------------------------*/
+/*Styles for the top navbar*/
+
+.navbar-link {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.navbar-links-container {
+    margin-top: 20px;
+    color: #f1f1f1;
+}
+
+/*Styles for the top navbar  -  End*/
+
+/*-----------------------------------------------------------------------------------*/
+/*Styles for the footer navbar*/
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #f1f1f1;
+}
+
+#sign {
+    margin-top: 15px;
+}
+
+/*Styles for the footer navbar  -  End*/
+
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.main-container {
+    padding: 0px 10px 50px 10px;
+}

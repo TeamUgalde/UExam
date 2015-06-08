@@ -1,0 +1,19 @@
+= devise_error_messages!
+.panel.panel-default
+  .panel-heading
+    %h4= t('.sign_in', :default => "Entrar con mi cuenta")
+  .panel-body
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f|
+      .form-group
+        = f.label :email
+        = f.email_field :email, autofocus: true, class: "form-control"
+      .form-group
+        = f.label :password
+        = f.password_field :password, autocomplete: "off", class: "form-control"
+      - if devise_mapping.rememberable?
+        .checkbox
+          %label
+            = f.check_box :remember_me
+            %label{:for => "user_remember_me"} Recuérdame
+      = f.submit  t('.sign_in', :default => "Entrar"), class: "btn btn-primary pull-right"
+= render "devise/shared/links"

@@ -1,0 +1,20 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        email: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
+        current_password: "Contraseña actual"
+    errors:
+      messages:
+        taken: " ya ha sido registrado."
+        confirmation: " debe coincidir con la primer contraseña."
+        too_short: " muy corta. Debe tener mínimo 8 caracteres."
+      models:
+        user:
+          attributes:
+            email:
+              blank: " no puede estar vacío."
+            password:
+              blank: " no puede estar en blanco."
