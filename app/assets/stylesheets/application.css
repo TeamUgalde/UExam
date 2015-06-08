@@ -20,37 +20,67 @@ html, body {
     margin:0 !important;
     padding:0 !important;
     height:100% !important;
-}
-
-/*Styles for the body container, includes: topbar-main-footerbar*/
-#body-container{
-    min-height: 100%;
-    position: relative;
-    background-color:  #f2f2f2;
-}
-
-/*Styles for the navbar footer*/
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 35px;
-}
-
-.navbar-container {
-    color: #f1f1f1;
-    height: 33px;
-    position: relative;
-}
-
-.navbar-container h5 {
-    margin-top: 10px;
-}
-
-.navbar-container h4 {
-    margin-top: 7px;
+    background-color: #F1F1F1;
 }
 
 .clear {
     clear: both;
+}
+
+#body-container{
+    min-height: 100%;
+    position: relative;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px floralwhite inset !important;
+}
+/*General styles  -  End*/
+
+/*-----------------------------------------------------------------------------------*/
+/*Styles for the top navbar*/
+
+.navbar-link {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.navbar-links-container {
+    margin-top: 20px;
+    color: #f1f1f1;
+}
+
+/*Styles for the top navbar  -  End*/
+
+/*-----------------------------------------------------------------------------------*/
+/*Styles for the footer navbar*/
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: #f1f1f1;
+}
+
+#sign {
+    margin-top: 15px;
+}
+
+/*Styles for the footer navbar  -  End*/
+
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.main-container {
+    padding: 0px 10px 50px 10px;
 }

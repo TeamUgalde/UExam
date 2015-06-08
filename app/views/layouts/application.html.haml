@@ -11,14 +11,39 @@
       %header
         %nav.navbar.navbar-static-top.navbar-default
           .container.navbar-container
-            %h4.pull-left.navbar-logo
-              %i.fa.fa-list-alt
-                UExam
-      %main
-        = yield
+            %h3.pull-left.navbar-logo
+              = link_to root_url, :class => 'navbar-link' do
+                %i.fa.fa-list-alt
+                  UExam
+            %div.navbar-links-container.pull-right
+              - if user_signed_in?
+                %strong.pull-right
+                  Usuario:
+                  = current_user.email
+                %div.clear
+                %div.pull-right
+                  = link_to root_path, :class => 'navbar-link' do
+                    %i.fa.fa-user
+                      Mi Perfil
+                  = link_to destroy_user_session_path, method: :delete, :class => 'navbar-link' do
+                    %i.fa.fa-sign-out
+                      Salir
+              - else
+                = link_to new_user_registration_path, :class => 'navbar-link enter-link', data: { toggle: "modal", target: "#nav-modal" }, remote: true do
+                  %i.fa.fa-plus
+                    Registrarse
+                |
+                = link_to new_user_session_path, :class => 'navbar-link enter-link', data: { toggle: "modal", target: "#nav-modal" }, remote: true do
+                  %i.fa.fa-sign-in
+                    Entrar
+      %main.main-container
+        = render partial: "partials/alerts", flash: flash
+        = render partial: "partials/navmodal", flash: flash
+        .container
+          = yield
+
       %footer.footer
         %nav.navbar.navbar-default
-          .container.navbar-container
-            %h5.pull-right
-              &copy;
-              Created by UTeam
+          .container
+            %h4.pull-right#sign
+              &copy; Created by UTeam
