@@ -11,7 +11,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608220609) do
+ActiveRecord::Schema.define(version: 20150609022216) do
+
+  create_table "exams", force: :cascade do |t|
+    t.string   "title"
+    t.date     "expires_on"
+    t.integer  "time_limit"
+    t.integer  "item_quantity"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "exams", ["user_id"], name: "index_exams_on_user_id"
+
+  create_table "item_answers", force: :cascade do |t|
+    t.integer  "option_number"
+    t.integer  "user_answer"
+    t.boolean  "correct"
+    t.integer  "solved_exam_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "item_answers", ["solved_exam_id"], name: "index_item_answers_on_solved_exam_id"
+
+  create_table "items", force: :cascade do |t|
+    t.string   "question"
+    t.string   "option_1"
+    t.string   "option_2"
+    t.string   "option_3"
+    t.string   "option_4"
+    t.string   "option_5"
+    t.integer  "correct_option"
+    t.integer  "item_number"
+    t.integer  "exam_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "items", ["exam_id"], name: "index_items_on_exam_id"
+
+  create_table "solved_exams", force: :cascade do |t|
+    t.boolean  "finished"
+    t.integer  "score"
+    t.integer  "correct_answers"
+    t.integer  "user_id"
+    t.integer  "exam_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "solved_exams", ["exam_id"], name: "index_solved_exams_on_exam_id"
+  add_index "solved_exams", ["user_id"], name: "index_solved_exams_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

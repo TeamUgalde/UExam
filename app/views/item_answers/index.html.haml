@@ -1,0 +1,25 @@
+%h1 Listing item_answers
+
+%table
+  %thead
+    %tr
+      %th Option number
+      %th User answer
+      %th Correct
+      %th
+      %th
+      %th
+
+  %tbody
+    - @item_answers.each do |item_answer|
+      %tr
+        %td= item_answer.option_number
+        %td= item_answer.user_answer
+        %td= item_answer.correct
+        %td= link_to 'Show', item_answer
+        %td= link_to 'Edit', edit_item_answer_path(item_answer)
+        %td= link_to 'Destroy', item_answer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Item answer', new_item_answer_path

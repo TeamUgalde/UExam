@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @exam.title
+%p
+  %b Expires on:
+  = @exam.expires_on
+%p
+  %b Time limit:
+  = @exam.time_limit
+%p
+  %b Item quantity:
+  = @exam.item_quantity
+
+= link_to 'Edit', edit_exam_path(@exam)
+\|
+= link_to 'Back', exams_path
