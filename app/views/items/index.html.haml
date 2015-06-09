@@ -1,0 +1,35 @@
+%h1 Listing items
+
+%table
+  %thead
+    %tr
+      %th Question
+      %th Option 1
+      %th Option 2
+      %th Option 3
+      %th Option 4
+      %th Option 5
+      %th Correct option
+      %th Item number
+      %th
+      %th
+      %th
+
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td= item.question
+        %td= item.option_1
+        %td= item.option_2
+        %td= item.option_3
+        %td= item.option_4
+        %td= item.option_5
+        %td= item.correct_option
+        %td= item.item_number
+        %td= link_to 'Show', item
+        %td= link_to 'Edit', edit_item_path(item)
+        %td= link_to 'Destroy', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Item', new_item_path

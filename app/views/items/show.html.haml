@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Question:
+  = @item.question
+%p
+  %b Option 1:
+  = @item.option_1
+%p
+  %b Option 2:
+  = @item.option_2
+%p
+  %b Option 3:
+  = @item.option_3
+%p
+  %b Option 4:
+  = @item.option_4
+%p
+  %b Option 5:
+  = @item.option_5
+%p
+  %b Correct option:
+  = @item.correct_option
+%p
+  %b Item number:
+  = @item.item_number
+
+= link_to 'Edit', edit_item_path(@item)
+\|
+= link_to 'Back', items_path

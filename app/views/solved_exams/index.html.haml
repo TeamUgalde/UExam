@@ -1,0 +1,25 @@
+%h1 Listing solved_exams
+
+%table
+  %thead
+    %tr
+      %th Finished
+      %th Score
+      %th Correct answers
+      %th
+      %th
+      %th
+
+  %tbody
+    - @solved_exams.each do |solved_exam|
+      %tr
+        %td= solved_exam.finished
+        %td= solved_exam.score
+        %td= solved_exam.correct_answers
+        %td= link_to 'Show', solved_exam
+        %td= link_to 'Edit', edit_solved_exam_path(solved_exam)
+        %td= link_to 'Destroy', solved_exam, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Solved exam', new_solved_exam_path

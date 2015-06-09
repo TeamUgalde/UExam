@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  has_many :exams
+  has_many :solved_exams
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # Include default devise modules. Others available are:

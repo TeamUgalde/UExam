@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Option number:
+  = @item_answer.option_number
+%p
+  %b User answer:
+  = @item_answer.user_answer
+%p
+  %b Correct:
+  = @item_answer.correct
+
+= link_to 'Edit', edit_item_answer_path(@item_answer)
+\|
+= link_to 'Back', item_answers_path
