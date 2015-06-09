@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Finished:
+  = @solved_exam.finished
+%p
+  %b Score:
+  = @solved_exam.score
+%p
+  %b Correct answers:
+  = @solved_exam.correct_answers
+
+= link_to 'Edit', edit_solved_exam_path(@solved_exam)
+\|
+= link_to 'Back', solved_exams_path

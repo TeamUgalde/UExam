@@ -1,0 +1,27 @@
+%h1 Listing exams
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Expires on
+      %th Time limit
+      %th Item quantity
+      %th
+      %th
+      %th
+
+  %tbody
+    - @exams.each do |exam|
+      %tr
+        %td= exam.title
+        %td= exam.expires_on
+        %td= exam.time_limit
+        %td= exam.item_quantity
+        %td= link_to 'Show', exam
+        %td= link_to 'Edit', edit_exam_path(exam)
+        %td= link_to 'Destroy', exam, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Exam', new_exam_path

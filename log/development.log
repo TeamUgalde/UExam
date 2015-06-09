@@ -3665,7 +3665,7 @@ Processing by Users::RegistrationsController#new as JS
   Rendered users/registrations/new.html.haml (11.0ms)
 Completed 200 OK in 15ms (Views: 14.6ms | ActiveRecord: 0.0ms)
   [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
   [1m[36m (0.1ms)[0m  [1m            SELECT sql
             FROM sqlite_master
             WHERE name='index_users_on_reset_password_token' AND type='index'
@@ -3681,36 +3681,3 @@ Completed 200 OK in 15ms (Views: 14.6ms | ActiveRecord: 0.0ms)
             SELECT sql
             FROM sqlite_temp_master
             WHERE name='index_users_on_email' AND type='index'
-
-
-
-Started GET "/" for ::1 at 2015-06-08 18:56:44 -0600
-  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-Processing by PagesController#home as HTML
-  Rendered pages/home.html.haml within layouts/application (4.2ms)
-  Rendered partials/_alerts.html.haml (1.3ms)
-  Rendered partials/_navmodal.html.haml (3.3ms)
-Completed 200 OK in 2981ms (Views: 2946.9ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/" for ::1 at 2015-06-08 18:56:47 -0600
-Processing by PagesController#home as HTML
-  Rendered pages/home.html.haml within layouts/application (0.2ms)
-  Rendered partials/_alerts.html.haml (0.1ms)
-  Rendered partials/_navmodal.html.haml (0.0ms)
-Completed 200 OK in 101ms (Views: 100.4ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/assets/bootstrap_and_overrides.self-d17d8d9ed6e5589765b873dd49def67ad6c920f755ef7be68506e05a21345870.css?body=1" for ::1 at 2015-06-08 18:56:48 -0600
-
-
-Started GET "/assets/pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-06-08 18:56:48 -0600
-
-
-Started GET "/assets/application.self-e43cd63493811f6c1ec4edbe16a5748d31481a0277cc572cfe3e87da5432f83d.css?body=1" for ::1 at 2015-06-08 18:56:48 -0600
-
-
-Started GET "/assets/pages.self-d8fbd81a570a01ecbe582c081d40f804a26fd41fd23c071a0332262b0a7ad487.js?body=1" for ::1 at 2015-06-08 18:56:48 -0600
-
-
-Started GET "/assets/application.self-b870f4765c2fcbf8cabec8478e3e32aa02ac855d9f609c451d170b187ee785a3.js?body=1" for ::1 at 2015-06-08 18:56:48 -0600

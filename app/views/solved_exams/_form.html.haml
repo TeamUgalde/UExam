@@ -1,0 +1,19 @@
+= form_for @solved_exam do |f|
+  - if @solved_exam.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@solved_exam.errors.count, "error")} prohibited this solved_exam from being saved:"
+      %ul
+        - @solved_exam.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :finished
+    = f.check_box :finished
+  .field
+    = f.label :score
+    = f.number_field :score
+  .field
+    = f.label :correct_answers
+    = f.number_field :correct_answers
+  .actions
+    = f.submit 'Save'

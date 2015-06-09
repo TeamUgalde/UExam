@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  expires_on: 2015-06-08
+  time_limit: 1
+  item_quantity: 1
+
+two:
+  title: MyString
+  expires_on: 2015-06-08
+  time_limit: 1
+  item_quantity: 1
