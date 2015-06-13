@@ -5,6 +5,12 @@ class ExamsController < ApplicationController
   # GET /exams.json
   def index
     @exams = Exam.all
+    render layout: false
+  end
+
+  def user_exams_index
+    @exams = Exam.where("user_id = ?", current_user.id)
+    render layout: false
   end
 
   # GET /exams/1

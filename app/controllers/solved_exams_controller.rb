@@ -4,7 +4,9 @@ class SolvedExamsController < ApplicationController
   # GET /solved_exams
   # GET /solved_exams.json
   def index
-    @solved_exams = SolvedExam.all
+    state = params[:state].eql?("True")
+    @solved_exams = SolvedExam.where("user_id = ? AND finished = ?", current_user.id, state)
+    render layout: false
   end
 
   # GET /solved_exams/1
