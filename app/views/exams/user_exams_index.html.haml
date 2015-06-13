@@ -14,8 +14,6 @@
       %h4
         Cantidad de preguntas:
         %p= exam.item_quantity
-      - if current_user.id != exam.user_id
-        = link_to 'Realizar', new_exam_path
       %span.date.sub-text
         Finaliza:
         = exam.expires_on

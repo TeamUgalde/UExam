@@ -1,0 +1,28 @@
+%h1 Mis examenes
+.row
+  .col-md-10.col-md-offset-1
+    %div{:role => "tabpanel", class: 'horizontal-tabs'}
+      / Nav tabs
+      %ul.nav.nav-tabs{:role => "tablist"}
+        %li.active.exam-tab{:role => 'presentation', path: '/solved_exams', div: '#completed-exams', :state => "True"}
+          %a{"aria-controls" => "Realizados", "data-toggle" => "tab", :href => "#completed-exams", :role => "tab"} Realizados
+        %li.exam-tab{:role => 'presentation', path: '/created_user_exams', div: '#created-exams', :state => "Created"}
+          %a{"aria-controls" => "Creados", "data-toggle" => "tab", :href => "#created-exams", :role => "tab"} Creados
+        %li.exam-tab{:role => 'presentation', path: '/solved_exams', div: '#pending-exams', :state => "False"}
+          %a{"aria-controls" => "Pendientes", "data-toggle" => "tab", :href => "#pending-exams", :role => "tab"} Pendientes
+
+      / Tab panes
+      .tab-content
+        #completed-exams.tab-pane.active{:role => "tabpanel"}
+          %h4
+            No ha completado ningun examen.
+        #created-exams.tab-pane{:role => "tabpanel"}
+          %h4
+            No ha creado ningun examen.
+        #pending-exams.tab-pane{:role => "tabpanel"}
+          %h4
+            No tiene examenes pendientes.
+
+= link_to 'Atras', root_path
+
+%script{:src => "/assets/user_exams.js" }

@@ -10,5 +10,9 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
+  get '/user_exams', :to => 'pages#user_exams'
+
+  get '/created_user_exams', :to => 'exams#user_exams_index'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :sessions => "users/sessions", :registrations => "users/registrations"}
 end
