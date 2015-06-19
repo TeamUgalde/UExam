@@ -14,14 +14,14 @@
       %h4
         Cantidad de preguntas:
         %p= exam.item_quantity
-      - if current_user.id != exam.user_id
-        = link_to 'Realizar', items_path(exam_id: exam.id)
-        /- se = SolvedExam.where("user_id = ? AND exam_id = ?", current_user.id, exam.id)
-        /- if se != nil
-        /  - if not se.first.finished
-        /    = link_to 'Continuar', items_path(exam_id: exam.id)
-        /- else
-        /  = link_to 'Realizar', items_path(exam_id: exam.id)
+      - if user_signed_in?
+        - if current_user.id != exam.user_id
+          - se = SolvedExam.where(['exam_id = ? and user_id = ?', exam.id, current_user.id])
+          - if se != nil
+            - if not se.first.finished
+              = link_to 'Continuar', items_path(exam_id: exam.id)
+          - else
+            = link_to 'Realizar', items_path(exam_id: exam.id)
       %span.date.sub-text
         Finaliza:
         = exam.expires_on
