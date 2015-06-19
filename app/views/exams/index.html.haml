@@ -1,27 +1,42 @@
+%label{id: 'user-id-label', user_id: current_user.id}
 - @exams.each do |exam|
-  .row.exam-box
-    .col-md-8.info
-      %h2= exam.title
-      %h4
-        Creado por:
-        = User.find(exam.user_id).fullname
-      %h4
-        Tiempo limite:
-        %p
-          = exam.time_limit
-          minutos
-          %i.fa.fa-clock-o
-      %h4
-        Cantidad de preguntas:
-        %p= exam.item_quantity
-      - if user_signed_in?
-        - if current_user.id != exam.user_id
-          - se = SolvedExam.where(['exam_id = ? and user_id = ?', exam.id, current_user.id])
-          - if se != nil
-            - if not se.first.finished
-              = link_to 'Continuar', items_path(exam_id: exam.id)
-          - else
-            = link_to 'Realizar', items_path(exam_id: exam.id)
-      %span.date.sub-text
-        Finaliza:
-        = exam.expires_on
+  .row
+    .col-md-12.exam-box
+      .row
+        .col-md-4
+          %h2.text-center
+            = exam.title
+            %h4.text-center
+              Creado por:
+              = User.find(exam.user_id).fullname
+        .col-md-2
+          %h4.text-center
+            Tiempo limite:
+            %h5.text-center
+              = exam.time_limit
+              minutos
+              %i.fa.fa-clock-o
+        .col-md-2
+          %h4.text-center
+            Cantidad de preguntas:
+            %h3.text-center
+              = exam.item_quantity
+        .col-md-2
+          %h4.text-center
+            Finaliza:
+            %h5.text-center
+              = exam.expires_on
+        .col-md-2
+          - if user_signed_in?
+            - if current_user.id != exam.user_id
+              - se = SolvedExam.where(['exam_id = ? and user_id = ?', exam.id, current_user.id])
+              %label{id: 'atributes', exam_id: exam.id, user_id: "#{current_user.id}"}
+              - if se.first != nil
+                - if not se.first.finished
+                  .exam-btn
+                    = link_to 'Continuar', exam_path(id: exam.id), id: 'load-solved-exam'
+              - else
+                .exam-btn
+                  = link_to 'Realizar', exam_path(id: exam.id), id: 'new-solved-exam', exam_id: "#{exam.id}"
+
+%script{:src => '/assets/exams.js' }
