@@ -14,5 +14,7 @@ Rails.application.routes.draw do
 
   get '/created_user_exams', :to => 'exams#user_exams_index'
 
+  get '/items/:id/correct_option', :to => 'items#get_correct_option'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :sessions => "users/sessions", :registrations => "users/registrations"}
 end

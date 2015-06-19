@@ -1,33 +1,34 @@
 %hr
 
-%h1
+%h1.text-center
   = @exam.title
 
 %hr
+
 .items-container
   - @items.each do |item|
     .question
       = item.item_number
       )
       = item.question
-    = form_for item  do |f|
-      %p
-        = f.radio_button 'option_1', 1
-        = f.label item.option_1
-      %p
-        = f.radio_button 'option_2', 2
-        = f.label item.option_2
-      %p
-        = f.radio_button 'option_3', 3
-        = f.label item.option_3
-      %p
-        = f.radio_button 'option_4', 4
-        = f.label item.option_4
-      %p
-        = f.radio_button 'option_5', 5
-        = f.label item.option_5
+    %ul.options
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}1', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 1}
+        = item.option_1
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}2', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 2}
+        = item.option_2
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}3', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 3}
+        = item.option_3
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}4', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 4}
+        = item.option_4
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}5', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 5}
+        = item.option_5
     %hr
 %hr
 
-%script{:src => "/assets/item.js" }
+%script{:src => '/assets/items.js' }
 

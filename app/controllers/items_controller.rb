@@ -8,6 +8,12 @@ class ItemsController < ApplicationController
     @items = @exam.items
   end
 
+  def get_correct_option
+    item = Item.find(params[:id])
+    correct_option = item.correct_option
+    render json: correct_option
+  end
+
   # GET /items/1
   # GET /items/1.json
   def show

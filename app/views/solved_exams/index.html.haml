@@ -15,7 +15,9 @@
       %h4
         Cantidad de preguntas:
         %p= exam.item_quantity
-      %h2= solved_exam.score
+      %h2
+        Nota:
+        = solved_exam.score
       %span.date.sub-text
         Finaliza:
         = exam.expires_on
