@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    render :layout => false
   end
 
   # GET /items/1/edit

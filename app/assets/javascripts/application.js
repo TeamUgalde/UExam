@@ -14,5 +14,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+//= require moment
+//= require bootstrap-datetimepicker
 //= require pages
+//= require exams
 

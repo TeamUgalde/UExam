@@ -31,17 +31,23 @@ class ExamsController < ApplicationController
   # POST /exams
   # POST /exams.json
   def create
-    @exam = Exam.new(exam_params)
+    exam_hash = params[:exam]
+    title = exam_hash["title"];
+    expiration_date = exam_hash["expirationDate"]
+    time_limit = exam_hash["timeLimit"].to_i
+    item_quantity = exam_hash["itemList"].length
+    item_list = exam_hash["itemList"]
 
-    respond_to do |format|
-      if @exam.save
-        format.html { redirect_to @exam, notice: 'Exam was successfully created.' }
-        format.json { render :show, status: :created, location: @exam }
-      else
-        format.html { render :new }
-        format.json { render json: @exam.errors, status: :unprocessable_entity }
-      end
+    new_exam = Exam.create(title: title, expires_on: expiration_date, time_limit: time_limit, item_quantity: item_quantity, user_id: current_user.id)
+    new_exam_id = new_exam.id
+
+    item_list.each_with_index do |itema, index|
+      item = itema[1]
+      Item.create(question: item["question"], option_1: item["option1"], option_2: item["option2"] , option_3: item["option3"],
+                  option_4: item[":option4"], option_5: item["option5"], item_number: index, exam_id: new_exam_id, correct_option: item["correctOption"].to_i)
     end
+
+    render json: "hola"
   end
 
   # PATCH/PUT /exams/1
@@ -49,7 +55,7 @@ class ExamsController < ApplicationController
   def update
     respond_to do |format|
       if @exam.update(exam_params)
-        format.html { redirect_to @exam, notice: 'Exam was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Exam was successfully updated.' }
         format.json { render :show, status: :ok, location: @exam }
       else
         format.html { render :edit }

@@ -1,22 +1,39 @@
-= form_for @exam do |f|
-  - if @exam.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@exam.errors.count, "error")} prohibited this exam from being saved:"
-      %ul
-        - @exam.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :expires_on
-    = f.date_select :expires_on
-  .field
-    = f.label :time_limit
-    = f.number_field :time_limit
-  .field
-    = f.label :item_quantity
-    = f.number_field :item_quantity
-  .actions
-    = f.submit 'Save'
+%br
+.new-exam-container
+  %form.form-horizontal
+    %fieldset
+      / Text input
+      .form-group
+        %label.col-md-4.control-label{:for => "new-exam-title"} Nombre del examen
+        .col-md-4
+          %input#new-exam-title.form-control.input-md{:name => "new-exam-title", :placeholder => "Ej: Estadística", :required => "", :type => "text"}
+      / Button Drop Down
+      .form-group
+        %label.col-md-4.control-label{:for => "new-exam-title"} Fecha de expiración
+        .col-md-4
+          #new-exam-expiration-date.input-group.date
+            %input.form-control#expiration-date-input{:type => "text"}/
+            %span.input-group-addon
+              %span.fa.fa-calendar
+      .form-group
+        %label.col-md-4.control-label{:for => "new-exam-time-limit"} Tiempo límite
+        .col-md-4
+          %select#new-exam-time-limit.form-control{:name => "new-exam-time-limit"}
+            %option{:value => "0"} Ilimitado
+            %option{:value => "30"} 30 min
+            %option{:value => "60"} 60 min
+            %option{:value => "90"} 90 min
+            %option{:value => "120"} 120 min
+            %option{:value => "150"} 150 min
+            %option{:value => "180"} 180 min
+.col-md-4
+.col-md-2
+  %button.blue-btn#add-item-btn
+    %i.fa.fa-plus.margin-right-10
+    Agregar ítem
+.col-md-2
+  %a{href: '/'}
+    %button.blue-btn#create-exam-btn
+      %i.fa.fa-pencil
+      Crear examen
+.clear
