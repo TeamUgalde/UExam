@@ -4,7 +4,8 @@ class ExamsController < ApplicationController
   # GET /exams
   # GET /exams.json
   def index
-    @exams = Exam.all
+    @exams = Exam.where("expires_on > ?", Time.now)
+
     render layout: false
   end
 

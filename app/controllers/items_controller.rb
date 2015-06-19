@@ -4,7 +4,8 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @exam = Exam.find(params[:exam_id])
+    @items = @exam.items
   end
 
   # GET /items/1
