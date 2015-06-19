@@ -3,6 +3,10 @@
 %h1.text-center
   = @exam.title
 
+- if @exam.time_limit == 0
+  %a{href: '/user_exams'}
+    %button.blue-btn#save-exam-btn Guardar
+
 %hr
 
 %label{id: 'solved-exam-label', solved_exam_id: @solved_exam.id}
@@ -10,30 +14,28 @@
 .items-container
   - @items.each do |item|
     .question
-      = item.item_number
+      = item.item_number+1
       )
       = item.question
-    %ul.options
+    %ul.options{id: "item-#{item.item_number}"}
       %li
-        %input{:class => 'item-option', :id => 'option-#{item.item_number}1', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 1}
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}1', :item_number => item.item_number,:item_id => item.id, :type => 'radio', name:"option-0", value: 1}
         = item.option_1
       %li
-        %input{:class => 'item-option', :id => 'option-#{item.item_number}2', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 2}
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}2', :item_number => item.item_number, :item_id => item.id, :type => 'radio', name:'option-1', value: 2}
         = item.option_2
       %li
-        %input{:class => 'item-option', :id => 'option-#{item.item_number}3', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 3}
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}3', :item_number => item.item_number, :item_id => item.id, :type => 'radio', name:'option-2', value: 3}
         = item.option_3
       %li
-        %input{:class => 'item-option', :id => 'option-#{item.item_number}4', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 4}
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}4', :item_number => item.item_number, :item_id => item.id, :type => 'radio', name:'option-3', value: 4}
         = item.option_4
       %li
-        %input{:class => 'item-option', :id => 'option-#{item.item_number}5', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 5}
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}5', :item_number => item.item_number, :item_id => item.id, :type => 'radio', name:'option-4', value: 5}
         = item.option_5
     %hr
 
-  .blue-btn
-    %button Finalizar
+  %a{href: '/user_exams'}
+    %button.blue-btn#finish-exam-btn Finalizar
 
 %hr
-
-%script{:src => '/assets/items.js' }

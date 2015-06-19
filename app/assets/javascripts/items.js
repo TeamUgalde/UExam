@@ -3,6 +3,7 @@
 
 var ready = function () {
     $('body').on("click", ".item-option", function() {
+        console.log("HOOA");
         var ul = $(this).parent().parent();
         var itemId = $(this).attr('item_id');
         $(this).parent().addClass("incorrect-option");
@@ -19,20 +20,41 @@ var ready = function () {
         var user_answer = $(this).attr('value');
         var solvedExamId = $('#solved-exam-label').attr('solved_exam_id');
         var correctAnswerAmount = getCorrectAnswers(solvedExamId);
-        if (correctOption == user_answer) {
+        var isCorrect = correctOption == user_answer;
+        if (isCorrect) {
             increaseCorrectAnswers(solvedExamId, correctAnswerAmount);
         }
+
+        var itemNumber = $(this).attr("item_number");
+        createItemAnswer(solvedExamId, itemNumber, isCorrect, user_answer);
+
     })
+
+
+    function createItemAnswer(solvedExamId, itemNumber, isCorrect, userAnswer) {
+        $.ajax({
+            method: 'post',
+            url: '/item_answers',
+            data: {solvedExamId: solvedExamId, itemNumber: itemNumber, isCorrect: isCorrect, userAnswer: userAnswer},
+            async: false,
+            statusCode: {
+                500: function () {
+                    alert("Error en el servidor");
+                }
+            }
+        });
+    }
 
     function increaseCorrectAnswers(solvedExamId, correctAnswerAmount) {
         $.ajax({
             method: 'put',
-            url: "/solved_exams/" + solvedExamId,
+            url: "/solved_exams/"+solvedExamId+"/correct_answers",
             async: false,
             data: {
-                correct_answers: correctAnswerAmount+1
+                correct_answers: correctAnswerAmount+1,
+                solved_exam_id: solvedExamId
             }
-        })
+        });
     }
 
     function getCorrectAnswers(solvedExamId) {

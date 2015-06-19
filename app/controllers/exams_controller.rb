@@ -56,15 +56,7 @@ class ExamsController < ApplicationController
   # PATCH/PUT /exams/1
   # PATCH/PUT /exams/1.json
   def update
-    respond_to do |format|
-      if @exam.update(exam_params)
-        format.html { redirect_to root_path, notice: 'Exam was successfully updated.' }
-        format.json { render :show, status: :ok, location: @exam }
-      else
-        format.html { render :edit }
-        format.json { render json: @exam.errors, status: :unprocessable_entity }
-      end
-    end
+
   end
 
   # DELETE /exams/1

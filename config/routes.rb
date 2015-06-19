@@ -18,5 +18,7 @@ Rails.application.routes.draw do
 
   get '/solved_exams/:id/correct_answers', :to => 'solved_exams#get_correct_answers'
 
+  put '/solved_exams/:id/correct_answers', :to => 'solved_exams#update_correct_answers'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :sessions => "users/sessions", :registrations => "users/registrations"}
 end

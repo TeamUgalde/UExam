@@ -1,6 +1,8 @@
 - if user_signed_in?
-  = link_to 'Mis examenes', user_exams_path
-  = link_to 'Crear examen', new_exam_path
+  %br
+  .homepage-btn-container
+    = link_to 'Mis examenes', user_exams_path, class: 'blue-btn homepage-btn'
+    = link_to 'Crear examen', new_exam_path, class: 'blue-btn homepage-btn'
 
 #exam-list
 

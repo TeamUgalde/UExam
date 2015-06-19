@@ -17,6 +17,19 @@ class ItemAnswersController < ApplicationController
     @item_answer = ItemAnswer.new
   end
 
+  def get_item_answers
+    item_answers = ItemAnswer.where("solved_exam_id = ?", params[:id])
+    user_answers = Array.new
+    item_answers.each do |item|
+      hash = Hash.new
+      hash["isCorrect"] = item.correct
+      hash["itemNumber"] = item.option_number
+
+      user_answers.push(item)
+    end
+    render
+  end
+
   # GET /item_answers/1/edit
   def edit
   end
@@ -24,17 +37,9 @@ class ItemAnswersController < ApplicationController
   # POST /item_answers
   # POST /item_answers.json
   def create
-    @item_answer = ItemAnswer.new(item_answer_params)
+    ItemAnswer.create(user_answer: params[:userAnswer], correct: params[:isCorrect], option_number: params[:itemNumber], solved_exam_id: params[:solvedExamId])
+    render json: "Exito"
 
-    respond_to do |format|
-      if @item_answer.save
-        format.html { redirect_to @item_answer, notice: 'Item answer was successfully created.' }
-        format.json { render :show, status: :created, location: @item_answer }
-      else
-        format.html { render :new }
-        format.json { render json: @item_answer.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /item_answers/1

@@ -62,8 +62,6 @@ var ready = function() {
     $("body").on("click", "#new-solved-exam", function () {
         var userId = $('#user-id-label').attr('user_id');
         var examId = $(this).attr('exam_id');
-        console.log(userId)
-        console.log(examId)
         $.ajax({
             method: 'post',
             url: '/solved_exams',
@@ -79,6 +77,34 @@ var ready = function() {
             }
         })
     });
+
+    $("body").on("click", "#finish-exam-btn", function () {
+        var solvedExamId = $('#solved-exam-label').attr('solved_exam_id');
+        $.ajax({
+            method: 'put',
+            url: '/solved_exams/'+solvedExamId
+        });
+    });
+
+
+    $("body").on("click", "#load-solved-exam", function () {
+        var solvedExamId = $('#solved-exam-label').attr('solved_exam_id');
+        $.ajax({
+            method: 'post',
+            url: '/solved_exams',
+            async: false,
+            data: {
+                solved_exam: {
+                    finished: false,
+                    score: 0,
+                    correct_answers: 0,
+                    user_id: userId,
+                    exam_id: examId
+                }
+            }
+        })
+    });
+
 
 }
 
