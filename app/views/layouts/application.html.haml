@@ -22,9 +22,6 @@
                   = current_user.email
                 %div.clear
                 %div.pull-right
-                  = link_to root_path, :class => 'navbar-link' do
-                    %i.fa.fa-user
-                      Mi Perfil
                   = link_to destroy_user_session_path, method: :delete, :class => 'navbar-link' do
                     %i.fa.fa-sign-out
                       Salir

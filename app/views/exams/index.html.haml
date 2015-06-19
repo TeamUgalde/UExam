@@ -1,4 +1,5 @@
-%label{id: 'user-id-label', user_id: current_user.id}
+- if user_signed_in?
+  %label{id: 'user-id-label', user_id: current_user.id}
 - @exams.each do |exam|
   .row
     .col-md-12.exam-box
@@ -38,5 +39,3 @@
               - else
                 .exam-btn
                   = link_to 'Realizar', exam_path(id: exam.id), id: 'new-solved-exam', exam_id: "#{exam.id}"
-
-%script{:src => '/assets/exams.js' }

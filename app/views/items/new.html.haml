@@ -1,5 +1,27 @@
-%h1 New item
+.new-item-container
+  %form.form-horizontal
+    %fieldset
+      / Text input
+      .form-group
+        %label.col-md-4.control-label{:for => "new-item-title"} Enunciado de la pregunta
+        .col-md-6
+          %input.form-control.input-md{:name => "new-item-title", :placeholder => "Ej: ¿En qué año murió Juan Santamaría?", :required => "", :type => "text"}
+        %label.col-md-4.control-label{:for => "new-item-list"} Opciones
+        .col-md-4
+        %ul.new-item-list.col-md-6{:name => "new-item-list"}
+          %li
+            %input.new-option-input.form-control{placeholder:"Opción 1", name:"choice1"}
+            %input{:type => "radio",name:"choice",value:"1",checked:true}
+          %li
+            %input.new-option-input.form-control{placeholder:"Opción 2" ,name:"choice2"}
+            %input{:type => "radio",name:"choice",value:"2"}
+          %li
+            %input.new-option-input.form-control{placeholder:"Opción 3" ,name:"choice3"}
+            %input{:type => "radio",name:"choice",value:"3"}
+          %li
+            %input.new-option-input.form-control{placeholder:"Opción 4" ,name:"choice4"}
+            %input{:type => "radio",name:"choice",value:"4"}
+          %li
+            %input.new-option-input.form-control{placeholder:"Opción 5" ,name:"choice5"}
+            %input{:type => "radio",name:"choice",value:"5"}
 
-= render 'form'
-
-= link_to 'Back', items_path

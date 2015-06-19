@@ -40,7 +40,13 @@ class SolvedExamsController < ApplicationController
   # PATCH/PUT /solved_exams/1
   # PATCH/PUT /solved_exams/1.json
   def update
-    @solved_exam = SolvedExam.update(correct_answers: params[:correct_answers])
+    se = SolvedExam.find(params[:id])
+    item_quantity = Exam.find(se.exam_id).item_quantity
+
+    score = (se.correct_answers * 100.0 / item_quantity).round(2)
+
+    SolvedExam.update(params[:id], score: score, finished: true)
+    render json: "Exito"
   end
 
   # DELETE /solved_exams/1
@@ -51,6 +57,11 @@ class SolvedExamsController < ApplicationController
       format.html { redirect_to solved_exams_url, notice: 'Solved exam was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def update_correct_answers
+    SolvedExam.update(params[:solved_exam_id], correct_answers: params[:correct_answers])
+    render json: "Exito"
   end
 
   private

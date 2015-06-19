@@ -74,4 +74,8 @@ gem 'omniauth-facebook'
 #Use angularjs
 gem 'angularjs-rails'
 
+#Datetimepicker
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
+
 

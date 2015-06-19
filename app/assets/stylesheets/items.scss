@@ -21,6 +21,29 @@
   padding: 25px;
 }
 
+.new-option-input {
+  width: 50%;
+  margin-top: 5px;
+  display: inline-block !important;
+}
+
+.new-item-list {
+  margin-top: 20px;
+}
+
+.new-item-container {
+  padding: 10px;
+  padding-top: 35px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 2px solid #5F91BA;
+  border-radius: 10px;
+}
+
+#new-exam-title {
+  margin-bottom: 15px;
+}
+
 .options {
   list-style: none;
 }

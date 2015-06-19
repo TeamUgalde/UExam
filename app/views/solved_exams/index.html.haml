@@ -1,23 +1,32 @@
 - @solved_exams.each do |solved_exam|
-  .row.exam-box
-    .col-md-8.info
-      - exam = Exam.find(solved_exam.exam_id)
-      %h2= exam.title
-      %h4
-        Creado por:
-        = User.find(exam.user_id).fullname
-      %h4
-        Tiempo limite:
-        %p
-          = exam.time_limit
-          minutos
-          %i.fa.fa-clock-o
-      %h4
-        Cantidad de preguntas:
-        %p= exam.item_quantity
-      %h2
-        Nota:
-        = solved_exam.score
-      %span.date.sub-text
-        Finaliza:
-        = exam.expires_on
+  .row
+    .col-md-12.exam-box
+      .row
+        .col-md-4
+          - exam = Exam.find(solved_exam.exam_id)
+          %h2.text-center
+            = exam.title
+            %h4.text-center
+              Creado por:
+              = User.find(exam.user_id).fullname
+        .col-md-2
+          %h4.text-center
+            Tiempo limite:
+            %h5.text-center
+              = exam.time_limit
+              minutos
+              %i.fa.fa-clock-o
+        .col-md-2
+          %h4.text-center
+            Cantidad de preguntas:
+            %h3.text-center
+              = exam.item_quantity
+        .col-md-2
+          %h4.text-center
+            Finaliza:
+            %h5.text-center
+              = exam.expires_on
+        .col-md-2
+          %h2.text-center.score
+            Nota:
+            = solved_exam.score
