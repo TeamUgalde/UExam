@@ -20,6 +20,7 @@ var ready = function() {
         return html;
     }
 
+
     $("body").on("click","#create-exam-btn",function() {
         var exam = {}
         exam["title"] = $("#new-exam-title").val();
@@ -56,6 +57,28 @@ var ready = function() {
             }
         });
     }
+
+
+    $("body").on("click", "#new-solved-exam", function () {
+        var userId = $('#user-id-label').attr('user_id');
+        var examId = $(this).attr('exam_id');
+        console.log(userId)
+        console.log(examId)
+        $.ajax({
+            method: 'post',
+            url: '/solved_exams',
+            async: false,
+            data: {
+                solved_exam: {
+                    finished: false,
+                    score: 0,
+                    correct_answers: 0,
+                    user_id: userId,
+                    exam_id: examId
+                }
+            }
+        })
+    });
 
 }
 

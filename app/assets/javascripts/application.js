@@ -17,5 +17,6 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require pages
+//= require items
 //= require exams
 
