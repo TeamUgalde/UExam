@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require pages
 //= require items
+//= require exams
 

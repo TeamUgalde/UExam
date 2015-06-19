@@ -9,6 +9,12 @@ class SolvedExamsController < ApplicationController
     render layout: false
   end
 
+  def get_correct_answers
+    solved_exam = SolvedExam.find(params[:id])
+    correct_answers = solved_exam.correct_answers
+    render json: correct_answers
+  end
+
   # GET /solved_exams/1
   # GET /solved_exams/1.json
   def show
@@ -27,30 +33,14 @@ class SolvedExamsController < ApplicationController
   # POST /solved_exams.json
   def create
     @solved_exam = SolvedExam.new(solved_exam_params)
-
-    respond_to do |format|
-      if @solved_exam.save
-        format.html { redirect_to @solved_exam, notice: 'Solved exam was successfully created.' }
-        format.json { render :show, status: :created, location: @solved_exam }
-      else
-        format.html { render :new }
-        format.json { render json: @solved_exam.errors, status: :unprocessable_entity }
-      end
-    end
+    @solved_exam.save
+    render layout:false
   end
 
   # PATCH/PUT /solved_exams/1
   # PATCH/PUT /solved_exams/1.json
   def update
-    respond_to do |format|
-      if @solved_exam.update(solved_exam_params)
-        format.html { redirect_to @solved_exam, notice: 'Solved exam was successfully updated.' }
-        format.json { render :show, status: :ok, location: @solved_exam }
-      else
-        format.html { render :edit }
-        format.json { render json: @solved_exam.errors, status: :unprocessable_entity }
-      end
-    end
+    @solved_exam = SolvedExam.update(correct_answers: params[:correct_answers])
   end
 
   # DELETE /solved_exams/1
@@ -71,6 +61,6 @@ class SolvedExamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def solved_exam_params
-      params.require(:solved_exam).permit(:finished, :score, :correct_answers)
+      params.require(:solved_exam).permit(:finished, :score, :correct_answers, :user_id, :exam_id)
     end
 end

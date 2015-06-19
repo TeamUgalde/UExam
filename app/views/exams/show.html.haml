@@ -1,18 +1,39 @@
-%p#notice= notice
+%hr
 
-%p
-  %b Title:
+%h1.text-center
   = @exam.title
-%p
-  %b Expires on:
-  = @exam.expires_on
-%p
-  %b Time limit:
-  = @exam.time_limit
-%p
-  %b Item quantity:
-  = @exam.item_quantity
 
-= link_to 'Edit', edit_exam_path(@exam)
-\|
-= link_to 'Back', exams_path
+%hr
+
+%label{id: 'solved-exam-label', solved_exam_id: @solved_exam.id}
+
+.items-container
+  - @items.each do |item|
+    .question
+      = item.item_number
+      )
+      = item.question
+    %ul.options
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}1', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 1}
+        = item.option_1
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}2', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 2}
+        = item.option_2
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}3', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 3}
+        = item.option_3
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}4', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 4}
+        = item.option_4
+      %li
+        %input{:class => 'item-option', :id => 'option-#{item.item_number}5', :item_id => item.id, :type => 'radio', name:'options-#{item.item_number}', value: 5}
+        = item.option_5
+    %hr
+
+  .blue-btn
+    %button Finalizar
+
+%hr
+
+%script{:src => '/assets/items.js' }

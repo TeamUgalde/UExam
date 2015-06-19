@@ -17,6 +17,9 @@ class ExamsController < ApplicationController
   # GET /exams/1
   # GET /exams/1.json
   def show
+    @exam = Exam.find(params[:id])
+    @solved_exam = SolvedExam.where("exam_id = ?", @exam.id).first
+    @items = @exam.items
   end
 
   # GET /exams/new

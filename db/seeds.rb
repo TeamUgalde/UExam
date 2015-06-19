@@ -60,7 +60,6 @@ items = Item.create([
                          option_2: 'Perro de traba', option_3: 'Perro con estilo', option_4: 'Melcochon',
                          option_5: 'Todos los apodos pertenecen a Mel', correct_option: 5, item_number: 10, exam_id: 1},
                     ])
-=end
 
 items_2 = Item.create([
                           {question: 'Que edad tiene melcuecha?', option_1: '21 años', option_2: '35 años',
@@ -94,3 +93,10 @@ items_2 = Item.create([
                            option_2: 'Perro de traba', option_3: 'Perro con estilo', option_4: 'Melcochon',
                            option_5: 'Todos los apodos pertenecen a Mel', correct_option: 5, item_number: 10, exam_id: 3}
                       ])
+
+=end
+
+exams2 = Exam.create([
+                        {title: 'Examen Parcial IV', expires_on: '2015-07-22', time_limit: 120,
+                         item_quantity: 10, user_id: 1}
+                     ])

@@ -15,13 +15,43 @@ var ready = function () {
             }
             $input.attr('disabled', true);
         })
+
+        var user_answer = $(this).attr('value');
+        var solvedExamId = $('#solved-exam-label').attr('solved_exam_id');
+        var correctAnswerAmount = getCorrectAnswers(solvedExamId);
+        if (correctOption == user_answer) {
+            increaseCorrectAnswers(solvedExamId, correctAnswerAmount);
+        }
     })
+
+    function increaseCorrectAnswers(solvedExamId, correctAnswerAmount) {
+        $.ajax({
+            method: 'put',
+            url: "/solved_exams/" + solvedExamId,
+            async: false,
+            data: {
+                correct_answers: correctAnswerAmount+1
+            }
+        })
+    }
+
+    function getCorrectAnswers(solvedExamId) {
+        var res;
+        $.ajax({
+            method: 'get',
+            url: "/solved_exams/"+solvedExamId+"/correct_answers",
+            async: false
+        }).done(function(response){
+            res = response;
+        });
+        return res;
+    }
 
     function getCorrectOption(itemId) {
         var res;
         $.ajax({
             method: 'get',
-            url: "items/"+itemId+"/correct_option",
+            url: "/items/"+itemId+"/correct_option",
             async: false
         }).done(function(response){
             res = response;
