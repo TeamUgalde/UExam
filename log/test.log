@@ -1,0 +1,602 @@
+Initializing jasmine.yml configuration
+  [1m[36m (132.1ms)[0m  [1mCREATE TABLE "exams" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "expires_on" date, "time_limit" integer, "item_quantity" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (132.5ms)[0m  [1mCREATE  INDEX "index_exams_on_user_id" ON "exams" ("user_id")[0m
+  [1m[35m (122.4ms)[0m  CREATE TABLE "item_answers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "option_number" integer, "user_answer" integer, "correct" boolean, "solved_exam_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (111.1ms)[0m  [1mCREATE  INDEX "index_item_answers_on_solved_exam_id" ON "item_answers" ("solved_exam_id")[0m
+  [1m[35m (133.2ms)[0m  CREATE TABLE "items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "question" varchar, "option_1" varchar, "option_2" varchar, "option_3" varchar, "option_4" varchar, "option_5" varchar, "correct_option" integer, "item_number" integer, "exam_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (122.2ms)[0m  [1mCREATE  INDEX "index_items_on_exam_id" ON "items" ("exam_id")[0m
+  [1m[35m (131.7ms)[0m  CREATE TABLE "solved_exams" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "finished" boolean, "score" integer, "correct_answers" integer, "user_id" integer, "exam_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (110.8ms)[0m  [1mCREATE  INDEX "index_solved_exams_on_exam_id" ON "solved_exams" ("exam_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_solved_exams_on_exam_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_solved_exams_on_exam_id' AND type='index'
+
+  [1m[36m (132.9ms)[0m  [1mCREATE  INDEX "index_solved_exams_on_user_id" ON "solved_exams" ("user_id")[0m
+  [1m[35m (126.1ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime, "updated_at" datetime, "provider" varchar, "uid" varchar, "fullname" varchar) 
+  [1m[36m (144.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (135.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (131.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (144.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (111.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150609022216')[0m
+  [1m[35m (111.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150531220221')
+  [1m[36m (134.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150609021942')[0m
+  [1m[35m (111.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150609021207')
+  [1m[36m (111.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150608220609')[0m
+  [1m[35m (145.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150609021525')
+  [1m[36m (145.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150531213049')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "exams" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-06-14 02:55:50.025942"], ["updated_at", "2015-06-14 02:55:50.025942"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "exams" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.030324"], ["updated_at", "2015-06-14 02:55:50.030324"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ExamsController#index as HTML
+  Rendered exams/index.html.haml (0.3ms)
+Completed 200 OK in 10ms (Views: 9.9ms | ActiveRecord: 0.0ms)
+  [1m[36mExam Load (0.2ms)[0m  [1mSELECT "exams".* FROM "exams"[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "exams" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.078870"], ["updated_at", "2015-06-14 02:55:50.078870"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ExamsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mExam Load (0.2ms)[0m  [1mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered exams/show.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 19ms (Views: 11.6ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ExamsController#new as HTML
+  Rendered exams/new.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "exams"
+Processing by ExamsController#create as HTML
+  Parameters: {"exam"=>{"title"=>"Examen Parcial I"}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "exams" ("title", "created_at", "updated_at") VALUES (?, ?, ?)  [["title", "Examen Parcial I"], ["created_at", "2015-06-14 02:55:50.114541"], ["updated_at", "2015-06-14 02:55:50.114541"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/exams/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "exams"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by ExamsController#create as HTML
+  Parameters: {"exam"=>{"title"=>"Examen Parcial I"}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "exams" ("title", "created_at", "updated_at") VALUES (?, ?, ?)  [["title", "Examen Parcial I"], ["created_at", "2015-06-14 02:55:50.120963"], ["updated_at", "2015-06-14 02:55:50.120963"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/exams/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ExamsController#create as HTML
+  Parameters: {"exam"=>{"wrong"=>"1", "bad"=>"2", "name"=>""}}
+Unpermitted parameters: wrong, bad, name
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "exams" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.127474"], ["updated_at", "2015-06-14 02:55:50.127474"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/exams/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "exams" ("title", "created_at", "updated_at") VALUES (?, ?, ?)  [["title", "Examen Parcial I"], ["created_at", "2015-06-14 02:55:50.131765"], ["updated_at", "2015-06-14 02:55:50.131765"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ExamsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mExam Load (0.1ms)[0m  SELECT  "exams".* FROM "exams" WHERE "exams"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered exams/edit.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "exams" ("title", "created_at", "updated_at") VALUES (?, ?, ?)  [["title", "Examen Parcial I"], ["created_at", "2015-06-14 02:55:50.140610"], ["updated_at", "2015-06-14 02:55:50.140610"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ExamsController#update as HTML
+  Parameters: {"exam"=>{"name"=>"Nuevo Examen"}, "id"=>"1"}
+  [1m[35mExam Load (0.1ms)[0m  SELECT  "exams".* FROM "exams" WHERE "exams"."id" = ? LIMIT 1  [["id", 1]]
+Unpermitted parameter: name
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/exams/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[36mExam Load (0.1ms)[0m  [1mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "exams" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Examen Parcial I"], ["created_at", "2015-06-14 02:55:50.147879"], ["updated_at", "2015-06-14 02:55:50.147879"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ExamsController#update as HTML
+  Parameters: {"exam"=>{"title"=>"Examen Parcial I"}, "id"=>"1"}
+  [1m[36mExam Load (0.1ms)[0m  [1mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/exams/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "exams" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Examen Parcial I"], ["created_at", "2015-06-14 02:55:50.154049"], ["updated_at", "2015-06-14 02:55:50.154049"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ExamsController#update as HTML
+  Parameters: {"exam"=>{"wrong"=>"1", "bad"=>"2", "name"=>""}, "id"=>"1"}
+  [1m[36mExam Load (0.1ms)[0m  [1mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: wrong, bad, name
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/exams/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "exams" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Examen Parcial I"], ["created_at", "2015-06-14 02:55:50.160692"], ["updated_at", "2015-06-14 02:55:50.160692"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "exams"[0m
+Processing by ExamsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mExam Load (0.1ms)[0m  SELECT  "exams".* FROM "exams" WHERE "exams"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "exams" WHERE "exams"."id" = ?  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/exams
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "exams"
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Processing by ExamsController#destroy as HTML
+  Parameters: {"id"=>"32"}
+  [1m[36mExam Load (0.1ms)[0m  [1mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = ? LIMIT 1[0m  [["id", 32]]
+Completed 404 Not Found in 2ms
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "item_answers" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.196437"], ["updated_at", "2015-06-14 02:55:50.196437"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "item_answers" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-06-14 02:55:50.198243"], ["updated_at", "2015-06-14 02:55:50.198243"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ItemAnswersController#index as HTML
+  Rendered item_answers/index.html.haml within layouts/application (0.2ms)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.0ms)
+  [1m[35mItemAnswer Load (0.2ms)[0m  SELECT "item_answers".* FROM "item_answers"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "item_answers" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-06-14 02:55:50.209835"], ["updated_at", "2015-06-14 02:55:50.209835"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ItemAnswersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mItemAnswer Load (0.2ms)[0m  SELECT  "item_answers".* FROM "item_answers" WHERE "item_answers"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered item_answers/show.html.haml within layouts/application (0.2ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by ItemAnswersController#new as HTML
+  Rendered item_answers/new.html.haml within layouts/application (0.2ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "item_answers"[0m
+Processing by ItemAnswersController#create as HTML
+  Parameters: {"item_answer"=>{"correct"=>true}}
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "item_answers" ("correct", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["correct", "t"], ["created_at", "2015-06-14 02:55:50.222809"], ["updated_at", "2015-06-14 02:55:50.222809"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/item_answers/1
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "item_answers"[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ItemAnswersController#create as HTML
+  Parameters: {"item_answer"=>{"correct"=>true}}
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "item_answers" ("correct", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["correct", "t"], ["created_at", "2015-06-14 02:55:50.228491"], ["updated_at", "2015-06-14 02:55:50.228491"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/item_answers/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Processing by ItemAnswersController#create as HTML
+  Parameters: {"item_answer"=>{"wrong"=>"1", "bad"=>"2", "name"=>""}}
+Unpermitted parameters: wrong, bad, name
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "item_answers" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-06-14 02:55:50.233678"], ["updated_at", "2015-06-14 02:55:50.233678"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/item_answers/1
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "item_answers" ("correct", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["correct", "t"], ["created_at", "2015-06-14 02:55:50.237319"], ["updated_at", "2015-06-14 02:55:50.237319"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ItemAnswersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mItemAnswer Load (0.1ms)[0m  [1mSELECT  "item_answers".* FROM "item_answers" WHERE "item_answers"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered item_answers/edit.html.haml within layouts/application (0.2ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "item_answers" ("correct", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["correct", "t"], ["created_at", "2015-06-14 02:55:50.243658"], ["updated_at", "2015-06-14 02:55:50.243658"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ItemAnswersController#update as HTML
+  Parameters: {"item_answer"=>{"name"=>"Nuevo ItemAnsweren"}, "id"=>"1"}
+  [1m[36mItemAnswer Load (0.0ms)[0m  [1mSELECT  "item_answers".* FROM "item_answers" WHERE "item_answers"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameter: name
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/item_answers/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[35mItemAnswer Load (0.0ms)[0m  SELECT  "item_answers".* FROM "item_answers" WHERE "item_answers"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "item_answers" ("correct", "created_at", "updated_at") VALUES (?, ?, ?)  [["correct", "t"], ["created_at", "2015-06-14 02:55:50.251339"], ["updated_at", "2015-06-14 02:55:50.251339"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ItemAnswersController#update as HTML
+  Parameters: {"item_answer"=>{"correct"=>true}, "id"=>"1"}
+  [1m[35mItemAnswer Load (0.1ms)[0m  SELECT  "item_answers".* FROM "item_answers" WHERE "item_answers"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/item_answers/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "item_answers" ("correct", "created_at", "updated_at") VALUES (?, ?, ?)  [["correct", "t"], ["created_at", "2015-06-14 02:55:50.258003"], ["updated_at", "2015-06-14 02:55:50.258003"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ItemAnswersController#update as HTML
+  Parameters: {"item_answer"=>{"wrong"=>"1", "bad"=>"2", "name"=>""}, "id"=>"1"}
+  [1m[35mItemAnswer Load (0.1ms)[0m  SELECT  "item_answers".* FROM "item_answers" WHERE "item_answers"."id" = ? LIMIT 1  [["id", 1]]
+Unpermitted parameters: wrong, bad, name
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/item_answers/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "item_answers" ("correct", "created_at", "updated_at") VALUES (?, ?, ?)  [["correct", "t"], ["created_at", "2015-06-14 02:55:50.264816"], ["updated_at", "2015-06-14 02:55:50.264816"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "item_answers"
+Processing by ItemAnswersController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mItemAnswer Load (0.1ms)[0m  [1mSELECT  "item_answers".* FROM "item_answers" WHERE "item_answers"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "item_answers" WHERE "item_answers"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/item_answers
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "item_answers"[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by ItemAnswersController#destroy as HTML
+  Parameters: {"id"=>"32"}
+  [1m[35mItemAnswer Load (0.1ms)[0m  SELECT  "item_answers".* FROM "item_answers" WHERE "item_answers"."id" = ? LIMIT 1  [["id", 32]]
+Completed 404 Not Found in 1ms
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-06-14 02:55:50.282614"], ["updated_at", "2015-06-14 02:55:50.282614"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.284582"], ["updated_at", "2015-06-14 02:55:50.284582"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ItemsController#index as HTML
+  [1m[36mExam Load (0.1ms)[0m  [1mSELECT  "exams".* FROM "exams" WHERE "exams"."id" = ? LIMIT 1[0m  [["id", nil]]
+Completed 404 Not Found in 2ms
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "items" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.293274"], ["updated_at", "2015-06-14 02:55:50.293274"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ItemsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mItem Load (0.3ms)[0m  [1mSELECT  "items".* FROM "items" WHERE "items"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered items/show.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 9ms (Views: 6.4ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ItemsController#new as HTML
+  Rendered items/new.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "items"
+Processing by ItemsController#create as HTML
+  Parameters: {"item"=>{"question"=>"Pregunta #1"}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("question", "created_at", "updated_at") VALUES (?, ?, ?)  [["question", "Pregunta #1"], ["created_at", "2015-06-14 02:55:50.314323"], ["updated_at", "2015-06-14 02:55:50.314323"]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/items/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "items"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by ItemsController#create as HTML
+  Parameters: {"item"=>{"question"=>"Pregunta #1"}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("question", "created_at", "updated_at") VALUES (?, ?, ?)  [["question", "Pregunta #1"], ["created_at", "2015-06-14 02:55:50.320056"], ["updated_at", "2015-06-14 02:55:50.320056"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/items/1
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by ItemsController#create as HTML
+  Parameters: {"item"=>{"wrong"=>"1", "bad"=>"2", "name"=>""}}
+Unpermitted parameters: wrong, bad, name
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.325553"], ["updated_at", "2015-06-14 02:55:50.325553"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/items/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "items" ("question", "created_at", "updated_at") VALUES (?, ?, ?)  [["question", "Pregunta #1"], ["created_at", "2015-06-14 02:55:50.329308"], ["updated_at", "2015-06-14 02:55:50.329308"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ItemsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mItem Load (0.1ms)[0m  SELECT  "items".* FROM "items" WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered items/edit.html.haml within layouts/application (0.2ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "items" ("question", "created_at", "updated_at") VALUES (?, ?, ?)  [["question", "Pregunta #1"], ["created_at", "2015-06-14 02:55:50.335684"], ["updated_at", "2015-06-14 02:55:50.335684"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by ItemsController#update as HTML
+  Parameters: {"item"=>{"name"=>"Nuevo Itemen"}, "id"=>"1"}
+  [1m[35mItem Load (0.1ms)[0m  SELECT  "items".* FROM "items" WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+Unpermitted parameter: name
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/items/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT  "items".* FROM "items" WHERE "items"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("question", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["question", "Pregunta #1"], ["created_at", "2015-06-14 02:55:50.342666"], ["updated_at", "2015-06-14 02:55:50.342666"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ItemsController#update as HTML
+  Parameters: {"item"=>{"question"=>"Pregunta #1"}, "id"=>"1"}
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT  "items".* FROM "items" WHERE "items"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/items/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "items" ("question", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["question", "Pregunta #1"], ["created_at", "2015-06-14 02:55:50.349331"], ["updated_at", "2015-06-14 02:55:50.349331"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ItemsController#update as HTML
+  Parameters: {"item"=>{"wrong"=>"1", "bad"=>"2", "name"=>""}, "id"=>"1"}
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT  "items".* FROM "items" WHERE "items"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: wrong, bad, name
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/items/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "items" ("question", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["question", "Pregunta #1"], ["created_at", "2015-06-14 02:55:50.355885"], ["updated_at", "2015-06-14 02:55:50.355885"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "items"[0m
+Processing by ItemsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mItem Load (0.1ms)[0m  SELECT  "items".* FROM "items" WHERE "items"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "items" WHERE "items"."id" = ?  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/items
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "items"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Processing by ItemsController#destroy as HTML
+  Parameters: {"id"=>"32"}
+  [1m[36mItem Load (0.1ms)[0m  [1mSELECT  "items".* FROM "items" WHERE "items"."id" = ? LIMIT 1[0m  [["id", 32]]
+Completed 404 Not Found in 1ms
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "solved_exams" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.373025"], ["updated_at", "2015-06-14 02:55:50.373025"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "solved_exams" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-06-14 02:55:50.375002"], ["updated_at", "2015-06-14 02:55:50.375002"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by SolvedExamsController#index as HTML
+Completed 500 Internal Server Error in 1ms
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "solved_exams" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.380856"], ["updated_at", "2015-06-14 02:55:50.380856"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by SolvedExamsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSolvedExam Load (0.2ms)[0m  [1mSELECT  "solved_exams".* FROM "solved_exams" WHERE "solved_exams"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered solved_exams/show.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 7ms (Views: 5.6ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by SolvedExamsController#new as HTML
+  Rendered solved_exams/new.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "solved_exams"
+Processing by SolvedExamsController#create as HTML
+  Parameters: {"solved_exam"=>{"score"=>"80"}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "solved_exams" ("score", "created_at", "updated_at") VALUES (?, ?, ?)  [["score", 80], ["created_at", "2015-06-14 02:55:50.398744"], ["updated_at", "2015-06-14 02:55:50.398744"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/solved_exams/1
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "solved_exams"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Processing by SolvedExamsController#create as HTML
+  Parameters: {"solved_exam"=>{"score"=>"80"}}
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "solved_exams" ("score", "created_at", "updated_at") VALUES (?, ?, ?)  [["score", 80], ["created_at", "2015-06-14 02:55:50.405133"], ["updated_at", "2015-06-14 02:55:50.405133"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/solved_exams/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by SolvedExamsController#create as HTML
+  Parameters: {"solved_exam"=>{"wrong"=>"a", "bad"=>"no", "name"=>"-2"}}
+Unpermitted parameters: wrong, bad, name
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "solved_exams" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-14 02:55:50.410390"], ["updated_at", "2015-06-14 02:55:50.410390"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/solved_exams/1
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "solved_exams" ("score", "created_at", "updated_at") VALUES (?, ?, ?)  [["score", 80], ["created_at", "2015-06-14 02:55:50.414371"], ["updated_at", "2015-06-14 02:55:50.414371"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by SolvedExamsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSolvedExam Load (0.1ms)[0m  SELECT  "solved_exams".* FROM "solved_exams" WHERE "solved_exams"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered solved_exams/edit.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "solved_exams" ("score", "created_at", "updated_at") VALUES (?, ?, ?)  [["score", 80], ["created_at", "2015-06-14 02:55:50.421154"], ["updated_at", "2015-06-14 02:55:50.421154"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Processing by SolvedExamsController#update as HTML
+  Parameters: {"solved_exam"=>{"name"=>"Nuevo SolvedExamen"}, "id"=>"1"}
+  [1m[35mSolvedExam Load (0.1ms)[0m  SELECT  "solved_exams".* FROM "solved_exams" WHERE "solved_exams"."id" = ? LIMIT 1  [["id", 1]]
+Unpermitted parameter: name
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/solved_exams/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[36mSolvedExam Load (0.0ms)[0m  [1mSELECT  "solved_exams".* FROM "solved_exams" WHERE "solved_exams"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "solved_exams" ("score", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["score", 80], ["created_at", "2015-06-14 02:55:50.429231"], ["updated_at", "2015-06-14 02:55:50.429231"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by SolvedExamsController#update as HTML
+  Parameters: {"solved_exam"=>{"score"=>"80"}, "id"=>"1"}
+  [1m[36mSolvedExam Load (0.1ms)[0m  [1mSELECT  "solved_exams".* FROM "solved_exams" WHERE "solved_exams"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/solved_exams/1
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "solved_exams" ("score", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["score", 80], ["created_at", "2015-06-14 02:55:50.437473"], ["updated_at", "2015-06-14 02:55:50.437473"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by SolvedExamsController#update as HTML
+  Parameters: {"solved_exam"=>{"wrong"=>"a", "bad"=>"no", "name"=>"-2"}, "id"=>"1"}
+  [1m[36mSolvedExam Load (0.1ms)[0m  [1mSELECT  "solved_exams".* FROM "solved_exams" WHERE "solved_exams"."id" = ? LIMIT 1[0m  [["id", 1]]
+Unpermitted parameters: wrong, bad, name
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/solved_exams/1
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "solved_exams" ("score", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["score", 80], ["created_at", "2015-06-14 02:55:50.445398"], ["updated_at", "2015-06-14 02:55:50.445398"]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "solved_exams"[0m
+Processing by SolvedExamsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSolvedExam Load (0.1ms)[0m  SELECT  "solved_exams".* FROM "solved_exams" WHERE "solved_exams"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "solved_exams" WHERE "solved_exams"."id" = ?  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/solved_exams
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "solved_exams"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Processing by SolvedExamsController#destroy as HTML
+  Parameters: {"id"=>"32"}
+  [1m[36mSolvedExam Load (0.1ms)[0m  [1mSELECT  "solved_exams".* FROM "solved_exams" WHERE "solved_exams"."id" = ? LIMIT 1[0m  [["id", 32]]
+Completed 404 Not Found in 1ms
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction

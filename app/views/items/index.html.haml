@@ -1,35 +1,33 @@
-%h1 Listing items
+%hr
 
-%table
-  %thead
-    %tr
-      %th Question
-      %th Option 1
-      %th Option 2
-      %th Option 3
-      %th Option 4
-      %th Option 5
-      %th Correct option
-      %th Item number
-      %th
-      %th
-      %th
+%h1
+  = @exam.title
 
-  %tbody
-    - @items.each do |item|
-      %tr
-        %td= item.question
-        %td= item.option_1
-        %td= item.option_2
-        %td= item.option_3
-        %td= item.option_4
-        %td= item.option_5
-        %td= item.correct_option
-        %td= item.item_number
-        %td= link_to 'Show', item
-        %td= link_to 'Edit', edit_item_path(item)
-        %td= link_to 'Destroy', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%hr
+.items-container
+  - @items.each do |item|
+    .question
+      = item.item_number
+      )
+      = item.question
+    = form_for item  do |f|
+      %p
+        = f.radio_button 'option_1', 1
+        = f.label item.option_1
+      %p
+        = f.radio_button 'option_2', 2
+        = f.label item.option_2
+      %p
+        = f.radio_button 'option_3', 3
+        = f.label item.option_3
+      %p
+        = f.radio_button 'option_4', 4
+        = f.label item.option_4
+      %p
+        = f.radio_button 'option_5', 5
+        = f.label item.option_5
+    %hr
+%hr
 
-%br
+%script{:src => "/assets/item.js" }
 
-= link_to 'New Item', new_item_path
